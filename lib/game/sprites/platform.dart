@@ -97,7 +97,7 @@ class NormalPlatform extends Platform<NormalPlatformState> {
   }
 }
 
-enum BrokenPlatformState { cracked, broken }
+enum BrokenPlatformState { cracked }
 
 class BrokenPlatform extends Platform<BrokenPlatformState> {
   BrokenPlatform({super.position});
@@ -109,8 +109,6 @@ class BrokenPlatform extends Platform<BrokenPlatformState> {
     sprites = <BrokenPlatformState, Sprite>{
       BrokenPlatformState.cracked:
           await gameRef.loadSprite('game/log-clipart-cartoon.png'),
-      BrokenPlatformState.broken:
-          await gameRef.loadSprite('game/log-clipart-cartoon.png'),
     };
 
     current = BrokenPlatformState.cracked;
@@ -118,7 +116,7 @@ class BrokenPlatform extends Platform<BrokenPlatformState> {
   }
 
   void breakPlatform() {
-    current = BrokenPlatformState.broken;
+    current = BrokenPlatformState.cracked;
   }
 }
 

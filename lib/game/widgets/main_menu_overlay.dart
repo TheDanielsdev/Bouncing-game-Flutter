@@ -18,7 +18,7 @@ class MainMenuOverlay extends StatefulWidget {
 }
 
 class _MainMenuOverlayState extends State<MainMenuOverlay> {
-  Character character = Character.dash;
+  Character character = Character.baseball;
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +63,21 @@ class _MainMenuOverlayState extends State<MainMenuOverlay> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CharacterButton(
-                        character: Character.dash,
-                        selected: character == Character.dash,
+                        character: Character.baseball,
+                        selected: character == Character.baseball,
                         onSelectChar: () {
                           setState(() {
-                            character = Character.dash;
+                            character = Character.baseball;
                           });
                         },
                         characterWidth: characterWidth,
                       ),
                       CharacterButton(
-                        character: Character.sparky,
-                        selected: character == Character.sparky,
+                        character: Character.fireball,
+                        selected: character == Character.fireball,
                         onSelectChar: () {
                           setState(() {
-                            character = Character.sparky;
+                            character = Character.fireball;
                           });
                         },
                         characterWidth: characterWidth,
@@ -181,7 +181,7 @@ class CharacterButton extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'assets/images/game/${character.name}_center.png',
+              'assets/images/game/${character.name}_m.png',
               height: characterWidth,
               width: characterWidth,
             ),

@@ -10,7 +10,10 @@ import './world.dart';
 import 'managers/managers.dart';
 import 'sprites/sprites.dart';
 
-enum Character { dash, sparky }
+enum Character {
+  baseball,
+  fireball,
+}
 
 class DoodleDash extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
@@ -79,7 +82,7 @@ class DoodleDash extends FlameGame
 
   @override
   Color backgroundColor() {
-    return const Color.fromARGB(255, 241, 247, 249);
+    return Color.fromARGB(255, 249, 241, 246);
   }
 
   void initializeGameStart() {

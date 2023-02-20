@@ -6,7 +6,9 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../doodle_dash.dart';
 import 'sprites.dart';
@@ -32,6 +34,29 @@ class Player extends SpriteGroupComponent<PlayerState>
           anchor: Anchor.center,
           priority: 1,
         );
+
+  void isMobileRight() {
+    _hAxisInput = 0; // by default not going left or right
+
+    if (isWearingHat) {
+      current = PlayerState.nooglerRight;
+    } else if (!hasPowerup) {
+      current = PlayerState.right;
+    }
+    _hAxisInput += movingRightInput;
+  }
+
+  void isMobileLeft() {
+    _hAxisInput = 0;
+
+    if (isWearingHat) {
+      current = PlayerState.nooglerLeft;
+    } else if (!hasPowerup) {
+      current = PlayerState.left;
+    }
+
+    _hAxisInput += movingLeftInput;
+  }
 
   int _hAxisInput = 0;
   final int movingLeftInput = -1;
@@ -75,7 +100,10 @@ class Player extends SpriteGroupComponent<PlayerState>
   }
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(
+    RawKeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
     _hAxisInput = 0;
 
     if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
@@ -88,7 +116,7 @@ class Player extends SpriteGroupComponent<PlayerState>
 
     // During development, its useful to "cheat"
     if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
-      // jump();
+      jump();
     }
 
     return true;
@@ -205,20 +233,16 @@ class Player extends SpriteGroupComponent<PlayerState>
 
   Future<void> _loadCharacterSprites() async {
     // Load & configure sprite assets
-    final left = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final right = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final center = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final rocket = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final nooglerCenter = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final nooglerLeft = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
-    final nooglerRight = await gameRef
-        .loadSprite('game/baseball-ball-vector-ball_baseball-999px.png');
+    final left = await gameRef.loadSprite('game/${character.name}_m.png');
+    final right = await gameRef.loadSprite('game/${character.name}_m.png');
+    final center = await gameRef.loadSprite('game/${character.name}_m.png');
+    final rocket = await gameRef.loadSprite('game/${character.name}_m.png');
+    final nooglerCenter =
+        await gameRef.loadSprite('game/${character.name}_m.png');
+    final nooglerLeft =
+        await gameRef.loadSprite('game/${character.name}_m.png');
+    final nooglerRight =
+        await gameRef.loadSprite('game/${character.name}_m.png');
 
     sprites = <PlayerState, Sprite>{
       PlayerState.left: left,

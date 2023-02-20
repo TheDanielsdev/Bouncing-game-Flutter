@@ -11,7 +11,7 @@ import '../doodle_dash.dart';
 class GameManager extends Component with HasGameRef<DoodleDash> {
   GameManager();
 
-  Character character = Character.dash;
+  Character character = Character.baseball;
   ValueNotifier<int> score = ValueNotifier(0);
   GameState state = GameState.intro;
 

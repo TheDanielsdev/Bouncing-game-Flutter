@@ -22,7 +22,7 @@ class ScoreDisplay extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: (game as DoodleDash).gameManager.score,
       builder: (context, value, child) {
-        return Text(value > 100 ? 'New High Score: $value' : 'Score: $value',
+        return Text('Score: $value',
             style: Theme.of(context).textTheme.displaySmall!);
       },
     );
